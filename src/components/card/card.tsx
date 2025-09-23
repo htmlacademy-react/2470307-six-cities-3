@@ -1,4 +1,4 @@
-function PlaceCardComponent(): JSX.Element {
+function PlaceCard(): JSX.Element {
   return (
     <article className="cities__card place-card">
       <div className="cities__image-wrapper place-card__image-wrapper">
@@ -34,4 +34,4 @@ function PlaceCardComponent(): JSX.Element {
   );
 }
 
-export default PlaceCardComponent;
+export {PlaceCard};

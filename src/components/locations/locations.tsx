@@ -1,4 +1,4 @@
-function LocationsComponent(): JSX.Element {
+function Locations(): JSX.Element {
   return(
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -37,4 +37,4 @@ function LocationsComponent(): JSX.Element {
   );
 }
 
-export default LocationsComponent;
+export { Locations };

@@ -1,4 +1,4 @@
-function HeaderComponent(): JSX.Element {
+function Header(): JSX.Element {
   return (
     <div className="container">
       <div className="header__wrapper">
@@ -29,4 +29,4 @@ function HeaderComponent(): JSX.Element {
   );
 }
 
-export default HeaderComponent;
+export { Header };

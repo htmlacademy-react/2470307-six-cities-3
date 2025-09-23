@@ -1,4 +1,4 @@
-import MainScreen from '../../pages/main/main-screen.jsx';
+import MainScreen from '../pages/main/main.js';
 
 type AppScreenProps = {
   placesCount: number;

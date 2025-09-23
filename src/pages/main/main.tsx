@@ -1,6 +1,6 @@
-import HeaderComponent from '../../components/header/header-component.tsx';
-import PlaceCardComponent from '../../components/card/place-card-component.tsx';
-import LocationsComponent from '../../components/locations/locations-component.tsx';
+import { Header } from '../../components/header/header.tsx';
+import { PlaceCard } from '../../components/card/card.tsx';
+import { Locations } from '../../components/locations/locations.tsx';
 
 type MainScreenProps = {
   placesCount: number;
@@ -9,12 +9,13 @@ type MainScreenProps = {
 function MainScreen({ placesCount }: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <HeaderComponent />
+
+      <Header />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <LocationsComponent />
+          <Locations />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -38,15 +39,15 @@ function MainScreen({ placesCount }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardComponent />
-                <PlaceCardComponent />
-                <PlaceCardComponent />
-                <PlaceCardComponent />
-                <PlaceCardComponent />
+                <PlaceCard />
+                <PlaceCard />
+                <PlaceCard />
+                <PlaceCard />
+                <PlaceCard />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map" />
             </div>
           </div>
         </div>

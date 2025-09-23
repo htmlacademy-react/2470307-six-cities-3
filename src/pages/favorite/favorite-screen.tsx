@@ -1,11 +1,11 @@
-import HeaderComponent from '../../components/header/header-component.jsx';
-import FooterComponent from '../../components/footer/footer-component.js';
+import { Header } from '../../components/header/header.js';
+import { Footer } from '../../components/footer/footer.js';
 
 function FavoriteScreen(): JSX.Element {
   return (
     <div className="page">
 
-      <HeaderComponent />
+      <Header />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
@@ -137,7 +137,7 @@ function FavoriteScreen(): JSX.Element {
         </div>
       </main>
 
-      <FooterComponent />
+      <Footer />
 
     </div>
   );

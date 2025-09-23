@@ -1,11 +1,11 @@
-import HeaderComponent from '../../components/header/header-component.tsx';
-import OfferInsideListComponent from '../../components/offer-inside/offer-inside-list-component.tsx';
+import { Header } from '../../components/header/header.tsx';
+import { OfferInsideList } from '../../components/offer-inside/offer-inside.tsx';
 
 function OfferScreen(): JSX.Element {
   return(
     <div className="page">
 
-      <HeaderComponent />
+      <Header />
 
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -42,7 +42,7 @@ function OfferScreen(): JSX.Element {
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
+                    <use xlinkHref="#icon-bookmark" />
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
@@ -72,7 +72,7 @@ function OfferScreen(): JSX.Element {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
 
-                <OfferInsideListComponent />
+                <OfferInsideList />
 
               </div>
               <div className="offer__host">
@@ -129,39 +129,39 @@ function OfferScreen(): JSX.Element {
                     <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
                     <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="#icon-star" />
                       </svg>
                     </label>
 
                     <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
                     <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="#icon-star" />
                       </svg>
                     </label>
 
                     <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
                     <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="#icon-star" />
                       </svg>
                     </label>
 
                     <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
                     <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="#icon-star" />
                       </svg>
                     </label>
 
                     <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
                     <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="#icon-star" />
                       </svg>
                     </label>
                   </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" />
                   <div className="reviews__button-wrapper">
                     <p className="reviews__help">
                       To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -172,7 +172,7 @@ function OfferScreen(): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <section className="offer__map map" />
         </section>
         <div className="container">
           <section className="near-places places">
@@ -192,7 +192,7 @@ function OfferScreen(): JSX.Element {
                     </div>
                     <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                       <svg className="place-card__bookmark-icon" width="18" height="19">
-                        <use xlinkHref="#icon-bookmark"></use>
+                        <use xlinkHref="#icon-bookmark" />
                       </svg>
                       <span className="visually-hidden">In bookmarks</span>
                     </button>
@@ -224,7 +224,7 @@ function OfferScreen(): JSX.Element {
                     </div>
                     <button className="place-card__bookmark-button button" type="button">
                       <svg className="place-card__bookmark-icon" width="18" height="19">
-                        <use xlinkHref="#icon-bookmark"></use>
+                        <use xlinkHref="#icon-bookmark" />
                       </svg>
                       <span className="visually-hidden">To bookmarks</span>
                     </button>
@@ -259,7 +259,7 @@ function OfferScreen(): JSX.Element {
                     </div>
                     <button className="place-card__bookmark-button button" type="button">
                       <svg className="place-card__bookmark-icon" width="18" height="19">
-                        <use xlinkHref="#icon-bookmark"></use>
+                        <use xlinkHref="#icon-bookmark" />
                       </svg>
                       <span className="visually-hidden">To bookmarks</span>
                     </button>
