@@ -1,10 +1,13 @@
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/header/header.tsx';
 import { OfferInsideList } from '../../components/offer-inside/offer-inside.tsx';
 
 function OfferScreen(): JSX.Element {
   return(
     <div className="page">
-
+      <Helmet>
+        <title>6 cities: offer</title>
+      </Helmet>
       <Header />
 
       <main className="page__main page__main--offer">
