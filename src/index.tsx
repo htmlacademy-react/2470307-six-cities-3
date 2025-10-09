@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app.jsx';
-import { Setting, AuthorizationStatus, AppRoute } from './constants.js';
+import { Setting, AuthorizationStatus } from './constants.js';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +12,6 @@ root.render(
     <App
       placesCount = { Setting.placesCount }
       authorizationStatus = { AuthorizationStatus.NoAuth }
-      replaceRoute = { AppRoute.Login }
     />
   </React.StrictMode>
 );

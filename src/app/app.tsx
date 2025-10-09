@@ -11,11 +11,10 @@ import NotFoundScreen from '../pages/not-found/not-found.js';
 type AppScreenProps = {
   placesCount: number;
   authorizationStatus: AuthorizationStatus;
-  replaceRoute: AppRoute;
 }
 
 function App(props: AppScreenProps): JSX.Element {
-  const { placesCount, authorizationStatus, replaceRoute } = props;
+  const { placesCount, authorizationStatus } = props;
 
   return (
     <HelmetProvider>
@@ -34,7 +33,7 @@ function App(props: AppScreenProps): JSX.Element {
             element={
               <PrivateRoute
                 mustBeRender={ authorizationStatus === AuthorizationStatus.Auth }
-                replaceRoute={ replaceRoute }
+                replaceRoute={ AppRoute.Login }
               >
                 <FavoriteScreen />
               </PrivateRoute>
@@ -45,7 +44,7 @@ function App(props: AppScreenProps): JSX.Element {
             element={ <OfferScreen /> }
           />
           <Route
-            path="*"
+            path={ AppRoute.NotFound }
             element={ <NotFoundScreen /> }
           />
         </Routes>
