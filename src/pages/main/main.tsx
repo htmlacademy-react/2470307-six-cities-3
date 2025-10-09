@@ -1,12 +1,13 @@
 import { Header } from '../../components/header/header.tsx';
 import { PlaceCard } from '../../components/card/card.tsx';
 import { Locations } from '../../components/locations/locations.tsx';
+import { TypeOffer } from '../../types/offer.ts';
 
 type MainScreenProps = {
-  placesCount: number;
+  offers: TypeOffer[];
 }
 
-function MainScreen({ placesCount }: MainScreenProps): JSX.Element {
+function MainScreen({ offers }: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
 
@@ -21,7 +22,7 @@ function MainScreen({ placesCount }: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 {' '}
@@ -39,10 +40,6 @@ function MainScreen({ placesCount }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
                 <PlaceCard />
               </div>
             </section>

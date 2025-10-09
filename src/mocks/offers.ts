@@ -6,7 +6,7 @@ export const offers: TypeOffer[] = [
     'title': 'The Joshua Tree House',
     'type': 'room',
     'price': 182,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
+    'previewImage': 'img/apartment-01.jpg',
     'city': {
       'name': 'Paris',
       'location': {
@@ -29,7 +29,7 @@ export const offers: TypeOffer[] = [
     'title': 'The Pondhouse - A Magical Place',
     'type': 'hotel',
     'price': 405,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
+    'previewImage': 'img/room.jpg"',
     'city': {
       'name': 'Paris',
       'location': {
@@ -52,7 +52,7 @@ export const offers: TypeOffer[] = [
     'title': 'The Pondhouse - A Magical Place',
     'type': 'room',
     'price': 243,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+    'previewImage': 'img/apartment-02.jpg',
     'city': {
       'name': 'Paris',
       'location': {
@@ -75,7 +75,7 @@ export const offers: TypeOffer[] = [
     'title': 'Penthouse, 4-5 rooms + 5 balconies',
     'type': 'house',
     'price': 404,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/5.jpg',
+    'previewImage': 'img/apartment-03.jpg',
     'city': {
       'name': 'Paris',
       'location': {

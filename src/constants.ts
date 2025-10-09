@@ -1,7 +1,3 @@
-const Setting = {
-  placesCount: 312
-};
-
 enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -16,4 +12,4 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export { Setting, AppRoute, AuthorizationStatus };
+export { AppRoute, AuthorizationStatus };

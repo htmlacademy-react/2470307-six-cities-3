@@ -7,14 +7,15 @@ import OfferScreen from '../pages/offer/offer.js';
 import LoginScreen from '../pages/login/login-screen.js';
 import FavoriteScreen from '../pages/favorite/favorite-screen.js';
 import NotFoundScreen from '../pages/not-found/not-found.js';
+import { TypeOffer } from '../types/offer.js';
 
 type AppScreenProps = {
-  placesCount: number;
   authorizationStatus: AuthorizationStatus;
+  offers: TypeOffer[];
 }
 
 function App(props: AppScreenProps): JSX.Element {
-  const { placesCount, authorizationStatus } = props;
+  const { authorizationStatus, offers } = props;
 
   return (
     <HelmetProvider>
@@ -22,7 +23,7 @@ function App(props: AppScreenProps): JSX.Element {
         <Routes>
           <Route
             path={ AppRoute.Main }
-            element={ <MainScreen placesCount={ placesCount } /> }
+            element={ <MainScreen offers={ offers } /> }
           />
           <Route
             path={ AppRoute.Login }
