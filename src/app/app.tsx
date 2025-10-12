@@ -33,7 +33,7 @@ function App(props: AppScreenProps): JSX.Element {
             path={ AppRoute.Favorites }
             element={
               <PrivateRoute
-                mustBeRender={ authorizationStatus === AuthorizationStatus.Auth }
+                mustBeRender={ authorizationStatus === AuthorizationStatus.NoAuth }
                 replaceRoute={ AppRoute.Login }
               >
                 <FavoriteScreen />

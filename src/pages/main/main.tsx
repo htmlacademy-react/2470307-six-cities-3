@@ -1,7 +1,7 @@
 import { Header } from '../../components/header/header.tsx';
-import { PlaceCard } from '../../components/card/card.tsx';
 import { Locations } from '../../components/locations/locations.tsx';
 import { TypeOffer } from '../../types/offer.ts';
+import { OffersList } from '../../components/offers-list/offers-list.tsx';
 
 type MainScreenProps = {
   offers: TypeOffer[];
@@ -40,7 +40,7 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} />)}
+                <OffersList offers={ offers } />
               </div>
             </section>
             <div className="cities__right-section">
