@@ -12,4 +12,6 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export { AppRoute, AuthorizationStatus };
+const getOfferUrl = (id: string) => AppRoute.Offer.replace(':id', id);
+
+export { AppRoute, AuthorizationStatus, getOfferUrl };

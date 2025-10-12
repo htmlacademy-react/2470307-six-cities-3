@@ -20,7 +20,7 @@ export const offers: TypeOffer[] = [
       'longitude': 2.342499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 1.9
   },
@@ -29,7 +29,7 @@ export const offers: TypeOffer[] = [
     'title': 'The Pondhouse - A Magical Place',
     'type': 'hotel',
     'price': 405,
-    'previewImage': 'img/room.jpg"',
+    'previewImage': 'img/apartment-02.jpg',
     'city': {
       'name': 'Paris',
       'location': {
@@ -44,7 +44,7 @@ export const offers: TypeOffer[] = [
       'zoom': 16
     },
     'isFavorite': false,
-    'isPremium': true,
+    'isPremium': false,
     'rating': 4.7
   },
   {
@@ -52,7 +52,7 @@ export const offers: TypeOffer[] = [
     'title': 'The Pondhouse - A Magical Place',
     'type': 'room',
     'price': 243,
-    'previewImage': 'img/apartment-02.jpg',
+    'previewImage': 'img/apartment-03.jpg',
     'city': {
       'name': 'Paris',
       'location': {
@@ -75,7 +75,7 @@ export const offers: TypeOffer[] = [
     'title': 'Penthouse, 4-5 rooms + 5 balconies',
     'type': 'house',
     'price': 404,
-    'previewImage': 'img/apartment-03.jpg',
+    'previewImage': 'img/room.jpg',
     'city': {
       'name': 'Paris',
       'location': {
@@ -89,8 +89,8 @@ export const offers: TypeOffer[] = [
       'longitude': 2.358499,
       'zoom': 16
     },
-    'isFavorite': false,
-    'isPremium': true,
+    'isFavorite': true,
+    'isPremium': false,
     'rating': 1.6
   }
 ];
