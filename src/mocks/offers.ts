@@ -8,7 +8,7 @@ export const offers: TypeOffer[] = [
     'price': 182,
     'previewImage': 'img/apartment-01.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Brussels',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,
@@ -77,7 +77,7 @@ export const offers: TypeOffer[] = [
     'price': 404,
     'previewImage': 'img/room.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Amsterdam',
       'location': {
         'latitude': 48.85661,
         'longitude': 2.351499,

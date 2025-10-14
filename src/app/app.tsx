@@ -36,13 +36,13 @@ function App(props: AppScreenProps): JSX.Element {
                 mustBeRender={ authorizationStatus === AuthorizationStatus.NoAuth }
                 replaceRoute={ AppRoute.Login }
               >
-                <FavoriteScreen />
+                <FavoriteScreen offers={ offers } />
               </PrivateRoute>
             }
           />
           <Route
             path={ AppRoute.Offer }
-            element={ <OfferScreen /> }
+            element={ <OfferScreen offers={ offers } /> }
           />
           <Route
             path={ AppRoute.NotFound }

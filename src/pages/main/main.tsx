@@ -40,7 +40,7 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={ offers } />
+                <OffersList offers={ offers } cardType='cities' />
               </div>
             </section>
             <div className="cities__right-section">
