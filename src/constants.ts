@@ -40,4 +40,24 @@ const cardConfig = {
 
 const NEAR_PLACES_COUNT = 3;
 
-export { AppRoute, AuthorizationStatus, getOfferUrl, cardConfig, NEAR_PLACES_COUNT };
+const REVIEW_RAITING_TITLES = {
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect',
+};
+
+const MIN_REVIEW_LENGTH = 50;
+const MAX_REVIEW_LENGTH = 300;
+
+export {
+  AppRoute,
+  AuthorizationStatus,
+  getOfferUrl,
+  cardConfig,
+  NEAR_PLACES_COUNT,
+  REVIEW_RAITING_TITLES,
+  MIN_REVIEW_LENGTH,
+  MAX_REVIEW_LENGTH
+};
