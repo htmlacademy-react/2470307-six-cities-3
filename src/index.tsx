@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app.jsx';
-import { Setting, AuthorizationStatus, AppRoute } from './constants.js';
+import { AuthorizationStatus } from './constants.js';
+import { offers } from './mocks/offers.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,9 +11,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      placesCount = { Setting.placesCount }
       authorizationStatus = { AuthorizationStatus.NoAuth }
-      replaceRoute = { AppRoute.Login }
+      offers = { offers }
     />
   </React.StrictMode>
 );
