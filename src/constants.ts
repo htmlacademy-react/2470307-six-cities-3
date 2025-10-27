@@ -51,6 +51,23 @@ const REVIEW_RAITING_TITLES = {
 const MIN_REVIEW_LENGTH = 50;
 const MAX_REVIEW_LENGTH = 300;
 
+const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+
+const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+
+const DEFAULT_ZOOM_MAP_MAIN_PAGE = 10;
+
+const TITLE_LAYER_MAP = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+
+const ATTRIBUTION_TITLE_LAYER_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+const ICON_SIZE = 40;
+
+enum AnchorLocation {
+  Horizontal = 20,
+  Vertical = 40
+}
+
 export {
   AppRoute,
   AuthorizationStatus,
@@ -59,5 +76,12 @@ export {
   NEAR_PLACES_COUNT,
   REVIEW_RAITING_TITLES,
   MIN_REVIEW_LENGTH,
-  MAX_REVIEW_LENGTH
+  MAX_REVIEW_LENGTH,
+  URL_MARKER_DEFAULT,
+  URL_MARKER_CURRENT,
+  DEFAULT_ZOOM_MAP_MAIN_PAGE,
+  TITLE_LAYER_MAP,
+  ATTRIBUTION_TITLE_LAYER_MAP,
+  ICON_SIZE,
+  AnchorLocation
 };

@@ -3,21 +3,19 @@ import { ReviewStar } from '../review-star/review-star.tsx';
 import { MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, REVIEW_RAITING_TITLES } from '../../constants.ts';
 
 function ReviewForm(): JSX.Element {
-  const [rating, setRating] = useState(0);
-  const [review, setReview] = useState('');
+  const [formData, setFormData] = useState({
+    rating: 0,
+    review: ''
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleRatingChange = (newRating: number) => {
-    setRating(newRating);
-  };
-
-  const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setReview(evt.target.value);
+  const handleFieldChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = evt.target;
+    setFormData({ ...formData, [name]: name === 'rating' ? Number(value) : value });
   };
 
   const resetForm = () => {
-    setRating(0);
-    setReview('');
+    setFormData({ rating: 0, review: '' });
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -27,13 +25,13 @@ function ReviewForm(): JSX.Element {
     // Имитация отправки данных на сервер
     setTimeout(() => {
       // eslint-disable-next-line no-console
-      console.log({ rating, review });
+      console.log(formData);
       setIsSubmitting(false);
       resetForm();
     }, 1000);
   };
 
-  const isFormValid = review.length >= MIN_REVIEW_LENGTH && review.length <= MAX_REVIEW_LENGTH && rating > 0;
+  const isFormValid = formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH && formData.rating > 0;
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
@@ -44,9 +42,9 @@ function ReviewForm(): JSX.Element {
             <ReviewStar
               value={Number(score)}
               title={title}
-              isChecked={Number(score) === rating}
+              isChecked={Number(score) === formData.rating}
               isDisabled={isSubmitting}
-              onChange={handleRatingChange}
+              onChange={handleFieldChange}
             />
           </Fragment>
         ))}
@@ -56,13 +54,13 @@ function ReviewForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={review}
+        value={formData.review}
         disabled={isSubmitting}
-        onChange={handleReviewChange}
+        onChange={handleFieldChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={!isFormValid || isSubmitting}>
           {isSubmitting ? 'Submitting...' : 'Submit'}

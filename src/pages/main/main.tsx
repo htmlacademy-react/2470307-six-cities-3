@@ -2,12 +2,20 @@ import { Header } from '../../components/header/header.tsx';
 import { Locations } from '../../components/locations/locations.tsx';
 import { TypeOffer } from '../../types/offer.ts';
 import { OffersList } from '../../components/offers-list/offers-list.tsx';
+import { Map } from '../../components/map/map';
+import { useState } from 'react';
 
 type MainScreenProps = {
   offers: TypeOffer[];
 }
 
 function MainScreen({ offers }: MainScreenProps): JSX.Element {
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+
+  const handleOfferHover = (offerId: string | null) => {
+    setActiveOfferId(offerId);
+  };
+
   return (
     <div className="page page--gray page--main">
 
@@ -40,11 +48,19 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={ offers } cardType='cities' />
+                <OffersList
+                  offers={ offers }
+                  cardType='cities'
+                  onOfferHover={handleOfferHover}
+                />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map
+                city={offers[0]}
+                points={offers}
+                selectedOfferId={activeOfferId}
+              />
             </div>
           </div>
         </div>

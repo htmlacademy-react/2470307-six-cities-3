@@ -1,9 +1,11 @@
+import { ChangeEvent } from 'react';
+
 type ReviewStarProps = {
   value: number;
   title: string;
   isChecked: boolean;
   isDisabled: boolean;
-  onChange: (value: number) => void;
+  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
 };
 
 function ReviewStar({ value, title, isChecked, isDisabled, onChange }: ReviewStarProps): JSX.Element {
@@ -18,7 +20,7 @@ function ReviewStar({ value, title, isChecked, isDisabled, onChange }: ReviewSta
         type="radio"
         checked={isChecked}
         disabled={isDisabled}
-        onChange={() => onChange(value)}
+        onChange={onChange}
       />
       <label htmlFor={ratingId} className="reviews__rating-label form__rating-label" title={title}>
         <svg className="form__star-image" width="37" height="33">
