@@ -1,15 +1,32 @@
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 import { Header } from '../../components/header/header.tsx';
 import { OfferInsideList } from '../../components/offer-inside/offer-inside.tsx';
 import { NearPlacesList } from '../../components/near-places-list/near-places-list.tsx';
 import { TypeOffer } from '../../types/offer.ts';
+import { reviews } from '../../mocks/reviews.ts';
 import { NEAR_PLACES_COUNT } from '../../constants.ts';
+import { ReviewList } from '../../components/review-list/review-list.tsx';
 import { ReviewForm } from '../../components/review-form/review-form.tsx';
+import { Map } from '../../components/map/map.tsx';
+import NotFoundScreen from '../not-found/not-found.tsx';
 
 type OfferScreenProps = {
   offers: TypeOffer[];
 }
 function OfferScreen({ offers }: OfferScreenProps): JSX.Element {
+  const { id } = useParams();
+  const currentOffer = offers.find((offer) => offer.id === id);
+
+  if (!currentOffer) {
+    return <NotFoundScreen />;
+  }
+
+  const nearbyOffers = offers
+    .filter((offer) => offer.id !== id)
+    .slice(0, NEAR_PLACES_COUNT);
+  const mapPoints = [...nearbyOffers, currentOffer];
+
   return(
     <div className="page">
       <Helmet>
@@ -48,7 +65,7 @@ function OfferScreen({ offers }: OfferScreenProps): JSX.Element {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {currentOffer.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -59,14 +76,14 @@ function OfferScreen({ offers }: OfferScreenProps): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }} />
+                  <span style={{ width: `${currentOffer.rating * 20}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{currentOffer.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {currentOffer.type.charAt(0).toUpperCase() + currentOffer.type.slice(1)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   3 Bedrooms
@@ -76,7 +93,7 @@ function OfferScreen({ offers }: OfferScreenProps): JSX.Element {
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{currentOffer.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
@@ -107,43 +124,23 @@ function OfferScreen({ offers }: OfferScreenProps): JSX.Element {
                   </p>
                 </div>
               </div>
-              <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }} />
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
-                <ReviewForm />
-              </section>
+              <ReviewList reviews={reviews} />
+              <ReviewForm />
+
             </div>
           </div>
-          <section className="offer__map map" />
+          <section className="offer__map map">
+            <Map
+              city={currentOffer}
+              points={mapPoints}
+              selectedOfferId={currentOffer.id}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-
-            <NearPlacesList offers={offers.slice(0, NEAR_PLACES_COUNT)} cardType='nearPlaces' />
+            <NearPlacesList offers={nearbyOffers} cardType='nearPlaces' />
 
           </section>
         </div>
