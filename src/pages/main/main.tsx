@@ -56,11 +56,13 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map
-                city={offers[0]}
-                points={offers}
-                selectedOfferId={activeOfferId}
-              />
+              <section className="cities__map map">
+                <Map
+                  city={offers[0]}
+                  points={offers}
+                  selectedOfferId={activeOfferId}
+                />
+              </section>
             </div>
           </div>
         </div>

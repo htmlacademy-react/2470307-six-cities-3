@@ -34,6 +34,16 @@ function useMap(
     }
   }, [mapRef, city]);
 
+  useEffect(() => {
+    if (map) {
+      map.setView(
+        [city.location.latitude, city.location.longitude],
+        DEFAULT_ZOOM_MAP_MAIN_PAGE
+      );
+    }
+  }, [map, city]);
+
+
   return map;
 }
 
