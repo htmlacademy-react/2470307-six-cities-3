@@ -1,15 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/header/header.js';
 import { Footer } from '../../components/footer/footer.js';
-import { TypeOffer } from '../../types/offer.js';
 import { FavoritesList } from '../../components/favorites-list/favorites-list.js';
+import { useAppSelector } from '../../store/hooks/hooks.ts';
+import { selectFavoriteOffers } from '../../store/selectors.ts';
 
-type MainScreenProps = {
-  offers: TypeOffer[];
-}
-
-function FavoriteScreen({ offers }: MainScreenProps): JSX.Element {
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+function FavoriteScreen(): JSX.Element {
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
 
   return (
     <div className="page">

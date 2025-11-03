@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app.jsx';
+import { Provider } from 'react-redux';
 import { AuthorizationStatus } from './constants.js';
-import { offers } from './mocks/offers.ts';
+import { store } from './store/index.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,9 +11,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      authorizationStatus = { AuthorizationStatus.NoAuth }
-      offers = { offers }
-    />
+    <Provider store={ store }>
+      <App
+        authorizationStatus = { AuthorizationStatus.NoAuth }
+      />
+    </Provider>
   </React.StrictMode>
 );
