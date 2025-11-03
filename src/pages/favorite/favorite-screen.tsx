@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import { Header } from '../../components/header/header.js';
-import { Footer } from '../../components/footer/footer.js';
-import { FavoritesList } from '../../components/favorites-list/favorites-list.js';
+import { Header } from '../../components/header/header.tsx';
+import { Footer } from '../../components/footer/footer.tsx';
+import { FavoritesList } from '../../components/favorites-list/favorites-list.tsx';
 import { useAppSelector } from '../../store/hooks/hooks.ts';
 import { selectFavoriteOffers } from '../../store/selectors.ts';
 

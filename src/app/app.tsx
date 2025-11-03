@@ -1,12 +1,12 @@
 import { Route, BrowserRouter, Routes} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../constants.js';
-import { PrivateRoute } from '../components/private-route/private-route.js';
+import { PrivateRoute } from '../components/private-route/private-route.tsx';
 import MainScreen from '../pages/main/main.tsx';
 import OfferScreen from '../pages/offer/offer.tsx';
-import LoginScreen from '../pages/login/login-screen.js';
-import FavoriteScreen from '../pages/favorite/favorite-screen.js';
-import NotFoundScreen from '../pages/not-found/not-found.js';
+import LoginScreen from '../pages/login/login-screen.tsx';
+import FavoriteScreen from '../pages/favorite/favorite-screen.tsx';
+import NotFoundScreen from '../pages/not-found/not-found.tsx';
 
 type AppScreenProps = {
   authorizationStatus: AuthorizationStatus;
