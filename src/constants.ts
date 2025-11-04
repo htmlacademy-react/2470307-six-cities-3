@@ -68,6 +68,15 @@ enum AnchorLocation {
   Vertical = 40
 }
 
+const CITIES = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf'
+];
+
 export {
   AppRoute,
   AuthorizationStatus,
@@ -83,5 +92,6 @@ export {
   TITLE_LAYER_MAP,
   ATTRIBUTION_TITLE_LAYER_MAP,
   ICON_SIZE,
-  AnchorLocation
+  AnchorLocation,
+  CITIES
 };

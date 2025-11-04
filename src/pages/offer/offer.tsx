@@ -1,31 +1,27 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { Header } from '../../components/header/header.tsx';
-import { OfferInsideList } from '../../components/offer-inside/offer-inside.tsx';
 import { NearPlacesList } from '../../components/near-places-list/near-places-list.tsx';
-import { TypeOffer } from '../../types/offer.ts';
 import { reviews } from '../../mocks/reviews.ts';
-import { NEAR_PLACES_COUNT } from '../../constants.ts';
 import { ReviewList } from '../../components/review-list/review-list.tsx';
 import { ReviewForm } from '../../components/review-form/review-form.tsx';
 import { Map } from '../../components/map/map.tsx';
 import NotFoundScreen from '../not-found/not-found.tsx';
+import { useAppSelector } from '../../store/hooks/hooks.ts';
+import { selectFilteredNearbyOffers, selectOfferById } from '../../store/selectors.ts';
 
-type OfferScreenProps = {
-  offers: TypeOffer[];
-}
-function OfferScreen({ offers }: OfferScreenProps): JSX.Element {
+function OfferScreen(): JSX.Element {
   const { id } = useParams();
-  const currentOffer = offers.find((offer) => offer.id === id);
+
+  const currentOffer = useAppSelector((state) => selectOfferById(state, id));
+
+  const filteredNearbyOffers = useAppSelector((state) => selectFilteredNearbyOffers(state, id));
 
   if (!currentOffer) {
     return <NotFoundScreen />;
   }
 
-  const nearbyOffers = offers
-    .filter((offer) => offer.id !== id)
-    .slice(0, NEAR_PLACES_COUNT);
-  const mapPoints = [...nearbyOffers, currentOffer];
+  const mapPoints = [...filteredNearbyOffers, currentOffer];
 
   return(
     <div className="page">
@@ -98,9 +94,6 @@ function OfferScreen({ offers }: OfferScreenProps): JSX.Element {
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
-
-                <OfferInsideList />
-
               </div>
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
@@ -124,25 +117,32 @@ function OfferScreen({ offers }: OfferScreenProps): JSX.Element {
                   </p>
                 </div>
               </div>
-              <ReviewList reviews={reviews} />
-              <ReviewForm />
+              {reviews.length > 0 && (
+                <>
+                  <ReviewList reviews={reviews} />
+                  <ReviewForm />
+                </>
+              )}
 
             </div>
           </div>
-          <section className="offer__map map">
-            <Map
-              city={currentOffer}
-              points={mapPoints}
-              selectedOfferId={currentOffer.id}
-            />
-          </section>
+          {mapPoints.length > 0 && (
+            <section className="offer__map map">
+              <Map
+                city={currentOffer}
+                points={mapPoints}
+                selectedOfferId={currentOffer.id}
+              />
+            </section>
+          )}
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <NearPlacesList offers={nearbyOffers} cardType='nearPlaces' />
-
-          </section>
+          {filteredNearbyOffers.length > 0 && (
+            <section className="near-places places">
+              <h2 className="near-places__title">Other places in the neighbourhood</h2>
+              <NearPlacesList offers={filteredNearbyOffers} cardType='nearPlaces' />
+            </section>
+          )}
         </div>
       </main>
     </div>

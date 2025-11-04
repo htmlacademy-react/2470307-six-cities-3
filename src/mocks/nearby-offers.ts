@@ -1,6 +1,6 @@
-import { TypeOffer } from '../types/offer.ts';
+import { TypeOffer } from '../types/offer';
 
-export const offers: TypeOffer[] = [
+export const nearbyOffers: TypeOffer[] = [
   {
     'id': 'babb3600-34a0-4f8c-8273-54418245f424',
     'title': 'The Joshua Tree House',
@@ -43,7 +43,7 @@ export const offers: TypeOffer[] = [
       'longitude': 4.85309666406198,
       'zoom': 16
     },
-    'isFavorite': true,
+    'isFavorite': false,
     'isPremium': false,
     'rating': 4.7
   },
@@ -92,74 +92,6 @@ export const offers: TypeOffer[] = [
     'isFavorite': true,
     'isPremium': false,
     'rating': 1.6
-  },
-  {
-    'id': '223aff3c-3ae0-4360-a087-667e490b6d5c',
-    'title': 'Perfectly located Castro',
-    'type': 'house',
-    'price': 774,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 48.868610000000004,
-      'longitude': 2.342499,
-      'zoom': 16
-    },
-    'isFavorite': false,
-    'isPremium': false,
-    'rating': 2.1
-  },
-  {
-    'id': 'b52f670c-859c-47eb-bd83-a591a6b9d85a',
-    'title': 'Wood and stone place',
-    'type': 'hotel',
-    'price': 493,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 48.858610000000006,
-      'longitude': 2.330499,
-      'zoom': 16
-    },
-    'isFavorite': false,
-    'isPremium': false,
-    'rating': 1.2
-  },
-  {
-    'id': '6f2a039d-36aa-44f4-98e4-01398f3d64d1',
-    'title': 'House in countryside',
-    'type': 'apartment',
-    'price': 458,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 48.834610000000005,
-      'longitude': 2.335499,
-      'zoom': 16
-    },
-    'isFavorite': true,
-    'isPremium': true,
-    'rating': 2.2
-  },
+  }
 ];
+

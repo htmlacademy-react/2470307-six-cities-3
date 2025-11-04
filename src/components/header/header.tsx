@@ -1,6 +1,13 @@
+import { Link } from 'react-router-dom';
 import { HeaderLogo } from '../logo/logo.tsx';
+import { AppRoute } from '../../constants.ts';
+import { useAppSelector } from '../../store/hooks/hooks.ts';
+import { selectFavoriteOffers } from '../../store/selectors.ts';
 
 function Header(): JSX.Element {
+  const favoriteOffers = useAppSelector(selectFavoriteOffers);
+  const favoriteCount = favoriteOffers.length;
+
   return (
     <div className="container">
       <div className="header__wrapper">
@@ -12,17 +19,16 @@ function Header(): JSX.Element {
         <nav className="header__nav">
           <ul className="header__nav-list">
             <li className="header__nav-item user">
-              <a className="header__nav-link header__nav-link--profile" href="#">
-                <div className="header__avatar-wrapper user__avatar-wrapper">
-                </div>
+              <Link className="header__nav-link header__nav-link--profile" to={ AppRoute.Favorites }>
+                <div className="header__avatar-wrapper user__avatar-wrapper" />
                 <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                <span className="header__favorite-count">3</span>
-              </a>
+                <span className="header__favorite-count">{favoriteCount}</span>
+              </Link>
             </li>
             <li className="header__nav-item">
-              <a className="header__nav-link" href="#">
+              <Link className="header__nav-link" to={ AppRoute.Login }>
                 <span className="header__signout">Sign out</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
