@@ -12,6 +12,23 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
+enum APIRoute {
+  Offers = '/offers',
+  Nearby = '/nearby',
+}
+
+enum AnchorLocation {
+  Horizontal = 20,
+  Vertical = 40
+}
+
+enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
 const getOfferUrl = (id: string) => AppRoute.Offer.replace(':id', id);
 
 const cardConfig = {
@@ -55,18 +72,13 @@ const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/java
 
 const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
-const DEFAULT_ZOOM_MAP_MAIN_PAGE = 10;
+const DEFAULT_ZOOM_MAP_MAIN_PAGE = 12;
 
 const TITLE_LAYER_MAP = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
 const ATTRIBUTION_TITLE_LAYER_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 const ICON_SIZE = 40;
-
-enum AnchorLocation {
-  Horizontal = 20,
-  Vertical = 40
-}
 
 const CITIES = [
   'Paris',
@@ -77,16 +89,15 @@ const CITIES = [
   'Dusseldorf'
 ];
 
-enum SortType {
-  Popular = 'Popular',
-  PriceLowToHigh = 'Price: low to high',
-  PriceHighToLow = 'Price: high to low',
-  TopRatedFirst = 'Top rated first',
-}
+const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities';
+const REQUEST_TIMEOUT = 5000;
 
 export {
+  BACKEND_URL,
+  REQUEST_TIMEOUT,
   AppRoute,
   AuthorizationStatus,
+  APIRoute,
   getOfferUrl,
   cardConfig,
   NEAR_PLACES_COUNT,

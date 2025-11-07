@@ -3,4 +3,4 @@ import { TypeOffer } from '../../types/offer.ts';
 
 export const changeCity = createAction<string>('city/change');
 
-export const loadOffers = createAction<TypeOffer[]>('offers/load');
+export const loadOffers = createAction<TypeOffer[]>('data/loadOffers');

@@ -1,20 +1,27 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { Header } from '../../components/header/header.tsx';
 import { NearPlacesList } from '../../components/near-places-list/near-places-list.tsx';
-import { reviews } from '../../mocks/reviews.ts';
 import { ReviewList } from '../../components/review-list/review-list.tsx';
 import { ReviewForm } from '../../components/review-form/review-form.tsx';
 import { Map } from '../../components/map/map.tsx';
 import NotFoundScreen from '../not-found/not-found.tsx';
-import { useAppSelector } from '../../store/hooks/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 import { selectFilteredNearbyOffers, selectOfferById } from '../../store/selectors.ts';
+import { fetchNearbyOffersAction } from '../../store/action/api-actions.ts';
 
 function OfferScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
   const { id } = useParams();
 
-  const currentOffer = useAppSelector((state) => selectOfferById(state, id));
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchNearbyOffersAction(id));
+    }
+  }, [id, dispatch]);
 
+  const currentOffer = useAppSelector((state) => selectOfferById(state, id));
   const filteredNearbyOffers = useAppSelector((state) => selectFilteredNearbyOffers(state, id));
 
   if (!currentOffer) {
@@ -117,12 +124,8 @@ function OfferScreen(): JSX.Element {
                   </p>
                 </div>
               </div>
-              {reviews.length > 0 && (
-                <>
-                  <ReviewList reviews={reviews} />
-                  <ReviewForm />
-                </>
-              )}
+              <ReviewList reviews={[]} />
+              <ReviewForm />
 
             </div>
           </div>

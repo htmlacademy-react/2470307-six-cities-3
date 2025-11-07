@@ -5,8 +5,9 @@ import { OffersList } from '../../components/offers-list/offers-list.tsx';
 import { Map } from '../../components/map/map.tsx';
 import { CitiesList } from '../../components/cities-list/cities-list.tsx';
 import { SortOptions } from '../../components/sort-options/sort-options.tsx';
+import { Spinner } from '../../components/spinner/spinner.tsx';
 import { changeCity } from '../../store/action/action.ts';
-import { selectSortedOffers } from '../../store/selectors.ts';
+import { selectOffersLoadingStatus, selectSortedOffers } from '../../store/selectors.ts';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 
 function MainScreen(): JSX.Element {
@@ -22,8 +23,13 @@ function MainScreen(): JSX.Element {
     dispatch(changeCity(city));
   };
 
-  const currentCity = useAppSelector((state) => state.offers.city);
-  const sortedOffers = useAppSelector(selectSortedOffers);
+  const currentCity = useAppSelector((state) => state.process.city);
+  const currentOffers = useAppSelector(selectSortedOffers);
+  const isOffersLoading = useAppSelector(selectOffersLoadingStatus);
+
+  if (isOffersLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -39,14 +45,14 @@ function MainScreen(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{sortedOffers.length} places to stay in {currentCity}</b>
+              <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
               <SortOptions />
-              <OffersList offers={sortedOffers} onOfferHover={handleOfferHover} cardType='cities' />
+              <OffersList offers={currentOffers} onOfferHover={handleOfferHover} cardType='cities' />
             </section>
             <div className="cities__right-section">
-              {sortedOffers.length > 0 && (
+              {currentOffers.length > 0 && (
                 <section className="cities__map map">
-                  <Map city={sortedOffers[0]} points={sortedOffers} selectedOfferId={activeOfferId} />
+                  <Map city={currentOffers[0]} points={currentOffers} selectedOfferId={activeOfferId} />
                 </section>
               )}
             </div>
