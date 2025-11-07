@@ -14,9 +14,7 @@ function SortOptions(): JSX.Element {
     setIsOpened(false);
   };
 
-  const handleToggleClick = () => {
-    setIsOpened((prev) => !prev);
-  };
+  const handleToggleClick = () => setIsOpened(!isOpened);
 
   return (
     <form className="places__sorting" action="#" method="get">
