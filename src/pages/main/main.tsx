@@ -6,8 +6,8 @@ import { Map } from '../../components/map/map.tsx';
 import { CitiesList } from '../../components/cities-list/cities-list.tsx';
 import { SortOptions } from '../../components/sort-options/sort-options.tsx';
 import { Spinner } from '../../components/spinner/spinner.tsx';
-import { changeCity } from '../../store/action/action.ts';
-import { selectOffersLoadingStatus, selectSortedOffers } from '../../store/selectors.ts';
+import { changeCity } from '../../store/action/sort-action.ts';
+import { selectCurrentOffers, selectOffersLoadingStatus, selectSortedOffers } from '../../store/selectors.ts';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 
 function MainScreen(): JSX.Element {
@@ -25,6 +25,7 @@ function MainScreen(): JSX.Element {
 
   const currentCity = useAppSelector((state) => state.process.city);
   const currentOffers = useAppSelector(selectSortedOffers);
+  const mapOffers = useAppSelector(selectCurrentOffers);
   const isOffersLoading = useAppSelector(selectOffersLoadingStatus);
 
   if (isOffersLoading) {
@@ -50,9 +51,9 @@ function MainScreen(): JSX.Element {
               <OffersList offers={currentOffers} onOfferHover={handleOfferHover} cardType='cities' />
             </section>
             <div className="cities__right-section">
-              {currentOffers.length > 0 && (
+              {mapOffers.length > 0 && (
                 <section className="cities__map map">
-                  <Map city={currentOffers[0]} points={currentOffers} selectedOfferId={activeOfferId} />
+                  <Map city={mapOffers[0]} points={mapOffers} selectedOfferId={activeOfferId} />
                 </section>
               )}
             </div>

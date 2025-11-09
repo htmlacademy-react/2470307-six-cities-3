@@ -3,8 +3,8 @@ import { TypeOffer } from '../../types/offer.ts';
 import { fetchOffersAction } from '../action/api-actions.ts';
 
 type InitialState = {
-  isOffersLoading: boolean;
   offers: TypeOffer[];
+  isOffersLoading: boolean;
 };
 
 const initialState: InitialState = {
@@ -12,7 +12,7 @@ const initialState: InitialState = {
   isOffersLoading: false,
 };
 
-const dataReducer = createReducer(initialState, (builder) => {
+const offersReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchOffersAction.pending, (state) => {
       state.isOffersLoading = true;
@@ -26,4 +26,4 @@ const dataReducer = createReducer(initialState, (builder) => {
     });
 });
 
-export { dataReducer };
+export { offersReducer };

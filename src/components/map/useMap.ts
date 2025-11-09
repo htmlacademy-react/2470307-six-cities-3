@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import leaflet from 'leaflet';
-import { TypeOffer } from '../../types/offer';
+import { TypeOffer } from '../../types/offer.ts';
 import { ATTRIBUTION_TITLE_LAYER_MAP, DEFAULT_ZOOM_MAP_MAIN_PAGE, TITLE_LAYER_MAP } from '../../constants.ts';
 
 function useMap(

@@ -15,13 +15,14 @@ function OfferScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
+  const currentOffer = useAppSelector((state) => selectOfferById(state, id));
+
   useEffect(() => {
-    if (id) {
+    if (id && currentOffer) {
       dispatch(fetchNearbyOffersAction(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, currentOffer]);
 
-  const currentOffer = useAppSelector((state) => selectOfferById(state, id));
   const filteredNearbyOffers = useAppSelector((state) => selectFilteredNearbyOffers(state, id));
 
   if (!currentOffer) {

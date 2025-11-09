@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CITIES } from '../../constants.ts';
-import { changeCity } from '../action/action.ts';
+import { changeCity } from '../action/sort-action.ts';
 
 type InitialState = {
   city: string;
