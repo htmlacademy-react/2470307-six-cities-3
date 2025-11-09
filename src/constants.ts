@@ -15,6 +15,8 @@ enum AuthorizationStatus {
 enum APIRoute {
   Offers = '/offers',
   Nearby = '/nearby',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 enum AnchorLocation {
