@@ -1,37 +1,40 @@
 import { useState, ChangeEvent, FormEvent, Fragment } from 'react';
-import { ReviewStar } from '../review-star/review-star.tsx';
-import { MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, REVIEW_RAITING_TITLES } from '../../constants.ts';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
+import { postReviewAction } from '../../store/action/api-actions.ts';
+import { MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, REVIEW_RAITING_TITLES, AuthorizationStatus } from '../../constants.ts';
 
-function ReviewForm(): JSX.Element {
-  const [formData, setFormData] = useState({
-    rating: 0,
-    review: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+function ReviewForm(): JSX.Element | null {
+  const { id: offerId } = useParams();
+  const dispatch = useAppDispatch();
+
+  const [formData, setFormData] = useState({ rating: 0, review: '' });
+
+  const isSubmitting = useAppSelector((state) => state.offerReview.isReviewSubmitting);
+  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
 
   const handleFieldChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
-    setFormData({ ...formData, [name]: name === 'rating' ? Number(value) : value });
-  };
-
-  const resetForm = () => {
-    setFormData({ rating: 0, review: '' });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    setIsSubmitting(true);
-
-    // Имитация отправки данных на сервер
-    setTimeout(() => {
-      // eslint-disable-next-line no-console
-      console.log(formData);
-      setIsSubmitting(false);
-      resetForm();
-    }, 1000);
+    if (offerId) {
+      dispatch(postReviewAction({
+        offerId,
+        reviewData: { comment: formData.review, rating: Number(formData.rating) }
+      })).then(() => {
+        setFormData({ rating: 0, review: '' });
+      });
+    }
   };
 
-  const isFormValid = formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH && formData.rating > 0;
+  const isFormValid = formData.rating !== 0 && formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH;
+
+  if (authorizationStatus !== AuthorizationStatus.Auth) {
+    return null;
+  }
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
@@ -39,13 +42,21 @@ function ReviewForm(): JSX.Element {
       <div className="reviews__rating-form form__rating">
         {Object.entries(REVIEW_RAITING_TITLES).reverse().map(([score, title]) => (
           <Fragment key={score}>
-            <ReviewStar
-              value={Number(score)}
-              title={title}
-              isChecked={Number(score) === formData.rating}
-              isDisabled={isSubmitting}
+            <input
+              className="form__rating-input visually-hidden"
+              name="rating"
+              value={score}
+              id={`${score}-stars`}
+              type="radio"
+              checked={Number(formData.rating) === Number(score)}
+              disabled={isSubmitting}
               onChange={handleFieldChange}
             />
+            <label htmlFor={`${score}-stars`} className="reviews__rating-label form__rating-label" title={title}>
+              <svg className="form__star-image" width="37" height="33">
+                <use xlinkHref="#icon-star" />
+              </svg>
+            </label>
           </Fragment>
         ))}
       </div>
