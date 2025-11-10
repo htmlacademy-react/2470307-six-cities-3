@@ -17,6 +17,7 @@ enum APIRoute {
   Nearby = '/nearby',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
 }
 
 enum AnchorLocation {

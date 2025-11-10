@@ -21,3 +21,18 @@ export type TypeOffer = {
   isPremium: boolean;
   rating: number;
 };
+
+export type TypeHost = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
+export type TypeFullOffer = TypeOffer & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: TypeHost;
+  images: string[];
+  maxAdults: number;
+};
