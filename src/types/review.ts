@@ -1,6 +1,6 @@
 import { UserData } from './user';
 
-export type Review = {
+export type TypeReview = {
   id: string;
   date: string;
   user: Omit<UserData, 'email'> & { name: string };
