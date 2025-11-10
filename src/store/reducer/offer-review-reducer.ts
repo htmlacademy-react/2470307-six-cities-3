@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Review } from '../../types/review';
+import { TypeReview } from '../../types/review';
 import { fetchReviewsAction, postReviewAction } from '../action/api-actions';
 
 type OfferReviewState = {
-  reviews: Review[];
+  reviews: TypeReview[];
   isReviewSubmitting: boolean;
 };
 
