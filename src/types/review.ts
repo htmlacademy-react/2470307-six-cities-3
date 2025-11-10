@@ -8,7 +8,7 @@ export type TypeReview = {
   rating: number;
 };
 
-export type ReviewData = {
+export type TypeReviewData = {
   comment: string;
   rating: number;
 };

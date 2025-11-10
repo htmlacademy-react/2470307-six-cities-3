@@ -6,7 +6,7 @@ import { APIRoute } from '../../constants.ts';
 import { RootState } from '../reducer/root-reducer.ts';
 import { AuthData, UserData } from '../../types/user.ts';
 import { dropToken, saveToken } from '../../services/token.ts';
-import { Review, ReviewData } from '../../types/review.ts';
+import { TypeReview, TypeReviewData } from '../../types/review.ts';
 
 export const fetchOffersAction = createAsyncThunk<TypeOffer[], undefined, {
   dispatch: AppDispatch;
@@ -47,7 +47,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<TypeOffer[], string, {
   },
 );
 
-export const fetchReviewsAction = createAsyncThunk<Review[], string, {
+export const fetchReviewsAction = createAsyncThunk<TypeReview[], string, {
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
@@ -55,12 +55,12 @@ export const fetchReviewsAction = createAsyncThunk<Review[], string, {
   'data/fetchReviews',
   async (offerId, { extra: api }) => {
     const url = `${APIRoute.Comments}/${offerId}`;
-    const { data } = await api.get<Review[]>(url);
+    const { data } = await api.get<TypeReview[]>(url);
     return data;
   },
 );
 
-export const postReviewAction = createAsyncThunk<Review, { reviewData: ReviewData; offerId: string }, {
+export const postReviewAction = createAsyncThunk<TypeReview, { reviewData: TypeReviewData; offerId: string }, {
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
@@ -68,7 +68,7 @@ export const postReviewAction = createAsyncThunk<Review, { reviewData: ReviewDat
   'data/postReview',
   async ({ reviewData, offerId }, { extra: api }) => {
     const url = `${APIRoute.Comments}/${offerId}`;
-    const { data } = await api.post<Review>(url, reviewData);
+    const { data } = await api.post<TypeReview>(url, reviewData);
     return data;
   },
 );
