@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { getToken } from '../services/token';
-import { BACKEND_URL, REQUEST_TIMEOUT } from '../constants';
+import { getToken } from '../services/token.ts';
+import { BACKEND_URL, REQUEST_TIMEOUT } from '../constants.ts';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({

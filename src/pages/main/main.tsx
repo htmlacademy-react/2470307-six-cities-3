@@ -6,6 +6,7 @@ import { Map } from '../../components/map/map.tsx';
 import { CitiesList } from '../../components/cities-list/cities-list.tsx';
 import { SortOptions } from '../../components/sort-options/sort-options.tsx';
 import { Spinner } from '../../components/spinner/spinner.tsx';
+import { NoOffers } from '../../components/no-offers/no-offers.tsx';
 import { changeCity } from '../../store/action/sort-action.ts';
 import { selectCurrentOffers, selectOffersLoadingStatus, selectSortedOffers } from '../../store/selectors.ts';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
@@ -43,21 +44,23 @@ function MainScreen(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList currentCity={currentCity} onCityChange={handleCityChange} />
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
-              <SortOptions />
-              <OffersList offers={currentOffers} onOfferHover={handleOfferHover} cardType='cities' />
-            </section>
-            <div className="cities__right-section">
-              {mapOffers.length > 0 && (
+          {currentOffers.length > 0 ? (
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
+                <SortOptions />
+                <OffersList offers={currentOffers} onOfferHover={handleOfferHover} cardType="cities" />
+              </section>
+              <div className="cities__right-section">
                 <section className="cities__map map">
                   <Map city={mapOffers[0]} points={mapOffers} selectedOfferId={activeOfferId} />
                 </section>
-              )}
+              </div>
             </div>
-          </div>
+          ) : (
+            <NoOffers city={currentCity} />
+          )}
         </div>
       </main>
     </div>

@@ -1,4 +1,4 @@
-import { UserData } from './user';
+import { UserData } from './user.ts';
 
 export type TypeReview = {
   id: string;

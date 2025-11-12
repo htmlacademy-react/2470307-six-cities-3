@@ -1,24 +1,29 @@
 import { Route, BrowserRouter, Routes} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useEffect } from 'react';
-import { AppRoute } from '../constants.ts';
+import { AppRoute, AuthorizationStatus } from '../constants.ts';
 import { PrivateRoute } from '../components/private-route/private-route.tsx';
 import MainScreen from '../pages/main/main.tsx';
 import OfferScreen from '../pages/offer/offer.tsx';
 import LoginScreen from '../pages/login/login-screen.tsx';
 import FavoriteScreen from '../pages/favorite/favorite-screen.tsx';
 import NotFoundScreen from '../pages/not-found/not-found.tsx';
-import { useAppDispatch } from '../store/hooks/hooks.ts';
-import { checkAuthAction, fetchOffersAction } from '../store/action/api-actions.ts';
+import { useAppDispatch, useAppSelector } from '../store/hooks/hooks.ts';
+import { checkAuthAction, fetchFavoritesAction, fetchOffersAction } from '../store/action/api-actions.ts';
 
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
 
   useEffect(() => {
     dispatch(checkAuthAction());
     dispatch(fetchOffersAction());
-  }, [dispatch]);
+
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoritesAction());
+    }
+  }, [dispatch, authorizationStatus]);
 
   return (
     <HelmetProvider>

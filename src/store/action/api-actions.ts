@@ -73,6 +73,30 @@ export const postReviewAction = createAsyncThunk<TypeReview, { reviewData: TypeR
   },
 );
 
+export const fetchFavoritesAction = createAsyncThunk<TypeOffer[], undefined, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavorites',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<TypeOffer[]>(APIRoute.Favorite);
+    return data;
+  },
+);
+
+export const changeFavoriteStatusAction = createAsyncThunk<TypeOffer, { offerId: string; status: number }, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
+  'data/changeFavoriteStatus',
+  async ({ offerId, status }, { extra: api }) => {
+    const { data } = await api.post<TypeOffer>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    return data;
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: RootState;
@@ -98,7 +122,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
   },
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, {
+export const logoutAction = createAsyncThunk<TypeOffer[], undefined, {
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
@@ -107,5 +131,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    return [];
   },
 );

@@ -8,6 +8,7 @@ function Header(): JSX.Element {
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const userData = useAppSelector((state) => state.user.userData);
+  const favoritesCount = useAppSelector((state) => state.favorites.favorites.length);
 
   const handleLogoutClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
@@ -34,6 +35,7 @@ function Header(): JSX.Element {
                         {userData.avatarUrl && <img src={userData.avatarUrl} alt="User avatar" width="20" height="20" />}
                       </div>
                       <span className="header__user-name user__name">{userData.email}</span>
+                      <span className="header__favorite-count">{favoritesCount}</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">

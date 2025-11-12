@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { TypeOffer } from '../../types/offer.ts';
-import { fetchOffersAction } from '../action/api-actions.ts';
+import { changeFavoriteStatusAction, fetchOffersAction } from '../action/api-actions.ts';
 
 type InitialState = {
   offers: TypeOffer[];
@@ -23,6 +23,13 @@ const offersReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchOffersAction.rejected, (state) => {
       state.isOffersLoading = false;
+    })
+    .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+      const updatedOffer = action.payload;
+      const index = state.offers.findIndex((offer) => offer.id === updatedOffer.id);
+      if (index !== -1) {
+        state.offers[index] = updatedOffer;
+      }
     });
 });
 

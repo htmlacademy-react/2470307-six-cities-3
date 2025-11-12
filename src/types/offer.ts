@@ -1,10 +1,10 @@
-export type TypeLocation = {
+type TypeLocation = {
   latitude: number;
   longitude: number;
   zoom: number;
 };
 
-export type TypeOfferCity = {
+type TypeOfferCity = {
   name: string;
   location: TypeLocation;
 };
@@ -22,7 +22,7 @@ export type TypeOffer = {
   rating: number;
 };
 
-export type TypeHost = {
+type TypeHost = {
   name: string;
   avatarUrl: string;
   isPro: boolean;

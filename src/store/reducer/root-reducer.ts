@@ -6,6 +6,7 @@ import { nearbyReducer } from './nearby-reducer.ts';
 import { userProcessReducer } from './user-process-reducer.ts';
 import { offerDataReducer } from './offer-data-reducer.ts';
 import { offerReviewReducer } from './offer-review-reducer.ts';
+import { favoritesReducer } from './favorites-reducer.ts';
 
 export const rootReducer = combineReducers({
   process: appProcessReducer,
@@ -14,7 +15,8 @@ export const rootReducer = combineReducers({
   nearby: nearbyReducer,
   user: userProcessReducer,
   offerData: offerDataReducer,
-  offerReview: offerReviewReducer
+  offerReview: offerReviewReducer,
+  favorites: favoritesReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
