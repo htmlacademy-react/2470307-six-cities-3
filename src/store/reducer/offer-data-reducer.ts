@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TypeFullOffer } from '../../types/offer';
-import { fetchOfferAction } from '../action/api-actions';
+import { TypeFullOffer } from '../../types/offer.ts';
+import { changeFavoriteStatusAction, fetchOfferAction } from '../action/api-actions.ts';
 
 type OfferDataState = {
   offer: TypeFullOffer | null;
@@ -28,6 +28,12 @@ const offerDataSlice = createSlice({
       .addCase(fetchOfferAction.rejected, (state) => {
         state.isOfferLoading = false;
         state.offer = null;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        const updatedOffer = action.payload;
+        if (state.offer && state.offer.id === updatedOffer.id) {
+          state.offer.isFavorite = updatedOffer.isFavorite;
+        }
       });
   },
 });

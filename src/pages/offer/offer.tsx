@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction } from '../../store/action/api-actions.ts';
 import { Spinner } from '../../components/spinner/spinner.tsx';
 import { selectFilteredNearbyOffers } from '../../store/selectors.ts';
+import { BookmarkButton } from '../../components/bookmark-button/bookmark-button.tsx';
 
 function OfferScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -67,12 +68,11 @@ function OfferScreen(): JSX.Element {
                 <h1 className="offer__name">
                   {currentOffer.title}
                 </h1>
-                <button className={`offer__bookmark-button button ${currentOffer.isFavorite ? 'offer__bookmark-button--active' : ''}`} type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton
+                  offerId={currentOffer.id}
+                  isFavorite={currentOffer.isFavorite}
+                  buttonType="offer"
+                />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { TypeOffer } from '../../types/offer.ts';
 import { cardConfig, getOfferUrl } from '../../constants.ts';
 import { CardType } from '../../types/card.ts';
+import { BookmarkButton } from '../bookmark-button/bookmark-button.tsx';
 
 type PlaceCardProps = {
   offer: TypeOffer;
@@ -41,18 +42,11 @@ function PlaceCard({ offer, cardType, onMouseEnter, onMouseLeave }: PlaceCardPro
             { ' ' }
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={
-            `place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`
-          }
-          type="button"
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">
-              {offer.isFavorite ? 'In bookmark' : 'To bookmarks'}
-            </span>
-          </button>
+          <BookmarkButton
+            offerId={offer.id}
+            isFavorite={offer.isFavorite}
+            buttonType="place-card"
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
