@@ -17,10 +17,11 @@ function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
 
   useEffect(() => {
-    dispatch(checkAuthAction());
     dispatch(fetchOffersAction());
 
-    if (authorizationStatus === AuthorizationStatus.Auth) {
+    if (authorizationStatus === AuthorizationStatus.Unknown) {
+      dispatch(checkAuthAction());
+    } else if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavoritesAction());
     }
   }, [dispatch, authorizationStatus]);

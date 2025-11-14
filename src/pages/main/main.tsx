@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Header } from '../../components/header/header.tsx';
 import { OffersList } from '../../components/offers-list/offers-list.tsx';
 import { Map } from '../../components/map/map.tsx';
@@ -13,6 +14,14 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 
 function MainScreen(): JSX.Element {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    const state = location.state as { city?: string };
+    if (state?.city) {
+      dispatch(changeCity(state.city));
+    }
+  }, [location.state, dispatch]);
 
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
@@ -26,6 +35,7 @@ function MainScreen(): JSX.Element {
 
   const currentCity = useAppSelector((state) => state.process.city);
   const currentOffers = useAppSelector(selectSortedOffers);
+  const hasOffers = currentOffers.length > 0;
   const mapOffers = useAppSelector(selectCurrentOffers);
   const isOffersLoading = useAppSelector(selectOffersLoadingStatus);
 
@@ -40,27 +50,29 @@ function MainScreen(): JSX.Element {
       </Helmet>
       <Header />
 
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index ${!hasOffers ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList currentCity={currentCity} onCityChange={handleCityChange} />
         <div className="cities">
-          {currentOffers.length > 0 ? (
-            <div className="cities__places-container container">
+          <div className={`cities__places-container ${!hasOffers ? 'cities__places-container--empty' : ''} container`}>
+            {hasOffers ? (
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
+                <b className="places__found">{currentOffers.length} {currentOffers.length === 1 ? 'place' : 'places'} to stay in {currentCity}</b>
                 <SortOptions />
                 <OffersList offers={currentOffers} onOfferHover={handleOfferHover} cardType="cities" />
               </section>
-              <div className="cities__right-section">
+            ) : (
+              <NoOffers city={currentCity} />
+            )}
+            <div className="cities__right-section">
+              {hasOffers && (
                 <section className="cities__map map">
-                  <Map city={mapOffers[0]} points={mapOffers} selectedOfferId={activeOfferId} />
+                  <Map city={mapOffers[0]} points={mapOffers} selectedOfferId={activeOfferId}/>
                 </section>
-              </div>
+              )}
             </div>
-          ) : (
-            <NoOffers city={currentCity} />
-          )}
+          </div>
         </div>
       </main>
     </div>

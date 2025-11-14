@@ -71,10 +71,11 @@ const REVIEW_RAITING_TITLES = {
 
 const MIN_REVIEW_LENGTH = 50;
 const MAX_REVIEW_LENGTH = 300;
+const MAX_REVIEWS_COUNT = 10;
 
-const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+const URL_MARKER_DEFAULT = '/img/pin.svg';
 
-const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+const URL_MARKER_CURRENT = '/img/pin-active.svg';
 
 const DEFAULT_ZOOM_MAP_MAIN_PAGE = 12;
 
@@ -96,6 +97,20 @@ const CITIES = [
 const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
+const BUTTON_CONFIG = {
+  'place-card': {
+    className: 'place-card__bookmark-button',
+    width: 18,
+    height: 19,
+  },
+  'offer': {
+    className: 'offer__bookmark-button',
+    width: 31,
+    height: 33,
+  },
+};
+
+
 export {
   BACKEND_URL,
   REQUEST_TIMEOUT,
@@ -108,6 +123,7 @@ export {
   REVIEW_RAITING_TITLES,
   MIN_REVIEW_LENGTH,
   MAX_REVIEW_LENGTH,
+  MAX_REVIEWS_COUNT,
   URL_MARKER_DEFAULT,
   URL_MARKER_CURRENT,
   DEFAULT_ZOOM_MAP_MAIN_PAGE,
@@ -116,5 +132,6 @@ export {
   ICON_SIZE,
   AnchorLocation,
   CITIES,
-  SortType
+  SortType,
+  BUTTON_CONFIG,
 };

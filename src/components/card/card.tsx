@@ -50,7 +50,7 @@ function PlaceCard({ offer, cardType, onMouseEnter, onMouseLeave }: PlaceCardPro
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${offer.rating * 20}%` }} />
+            <span style={{ width: `${Math.round(offer.rating) * 20}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

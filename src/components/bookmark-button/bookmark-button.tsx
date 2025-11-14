@@ -1,25 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
-import { AppRoute, AuthorizationStatus } from '../../constants.ts';
+import { AppRoute, AuthorizationStatus, BUTTON_CONFIG } from '../../constants.ts';
 import { changeFavoriteStatusAction } from '../../store/action/api-actions.ts';
 
 type BookmarkButtonProps = {
   offerId: string;
   isFavorite: boolean;
   buttonType: 'place-card' | 'offer';
-};
-
-const buttonConfig = {
-  'place-card': {
-    className: 'place-card__bookmark-button',
-    width: 18,
-    height: 19,
-  },
-  'offer': {
-    className: 'offer__bookmark-button',
-    width: 31,
-    height: 33,
-  },
 };
 
 function BookmarkButton({ offerId, isFavorite, buttonType }: BookmarkButtonProps): JSX.Element {
@@ -38,7 +25,7 @@ function BookmarkButton({ offerId, isFavorite, buttonType }: BookmarkButtonProps
     dispatch(changeFavoriteStatusAction({ offerId, status: newStatus }));
   };
 
-  const { className, width, height } = buttonConfig[buttonType];
+  const { className, width, height } = BUTTON_CONFIG[buttonType];
   const activeClassName = isFavorite ? `${className}--active` : '';
 
   return (

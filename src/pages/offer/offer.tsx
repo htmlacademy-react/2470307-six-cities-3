@@ -10,7 +10,7 @@ import NotFoundScreen from '../not-found/not-found.tsx';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction } from '../../store/action/api-actions.ts';
 import { Spinner } from '../../components/spinner/spinner.tsx';
-import { selectFilteredNearbyOffers } from '../../store/selectors.ts';
+import { selectFilteredNearbyOffers, selectSortedReviews } from '../../store/selectors.ts';
 import { BookmarkButton } from '../../components/bookmark-button/bookmark-button.tsx';
 
 function OfferScreen(): JSX.Element {
@@ -18,8 +18,9 @@ function OfferScreen(): JSX.Element {
   const { id } = useParams();
 
   const { offer: currentOffer, isOfferLoading } = useAppSelector((state) => state.offerData);
-  const { reviews } = useAppSelector((state) => state.offerReview);
   const nearbyOffers = useAppSelector((state) => selectFilteredNearbyOffers(state, id));
+  const sortedReviews = useAppSelector(selectSortedReviews);
+  const totalReviewsCount = useAppSelector((state) => state.offerReview.reviews.length);
 
   useEffect(() => {
     if (id) {
@@ -76,7 +77,7 @@ function OfferScreen(): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: `${currentOffer.rating * 20}%` }} />
+                  <span style={{ width: `${Math.round(currentOffer.rating) * 20}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{currentOffer.rating}</span>
@@ -121,7 +122,7 @@ function OfferScreen(): JSX.Element {
                   <p className="offer__text">{currentOffer.description}</p>
                 </div>
               </div>
-              <ReviewList reviews={reviews} />
+              <ReviewList reviews={sortedReviews} totalReviewsCount={totalReviewsCount} />
               <ReviewForm />
 
             </div>

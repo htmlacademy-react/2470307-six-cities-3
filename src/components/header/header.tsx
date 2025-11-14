@@ -1,11 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants.ts';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 import { logoutAction } from '../../store/action/api-actions.ts';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+
+  const location = useLocation();
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const userData = useAppSelector((state) => state.user.userData);
   const favoritesCount = useAppSelector((state) => state.favorites.favorites.length);
@@ -13,7 +14,7 @@ function Header(): JSX.Element {
   const handleLogoutClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     dispatch(logoutAction());
-    navigate(AppRoute.Main);
+
   };
 
   return (
@@ -45,12 +46,14 @@ function Header(): JSX.Element {
                   </li>
                 </>
               ) : (
-                <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__login">Sign in</span>
-                  </Link>
-                </li>
+                location.pathname as AppRoute !== AppRoute.Login && (
+                  <li className="header__nav-item user">
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
+                      <div className="header__avatar-wrapper user__avatar-wrapper" />
+                      <span className="header__login">Sign in</span>
+                    </Link>
+                  </li>
+                )
               )}
             </ul>
           </nav>
