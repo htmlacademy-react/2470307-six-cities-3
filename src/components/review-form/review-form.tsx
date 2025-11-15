@@ -1,21 +1,28 @@
 import { useState, ChangeEvent, FormEvent, Fragment, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
-import { postReviewAction } from '../../store/action/api-actions.ts';
-import { MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, REVIEW_RAITING_TITLES, AuthorizationStatus } from '../../constants.ts';
+import { postReviewAction } from '../../store/action/action.ts';
+import {
+  MAX_REVIEW_LENGTH,
+  MIN_REVIEW_LENGTH,
+  REVIEW_RAITING_TITLES,
+  AuthorizationStatus,
+  INITIAL_RATING,
+  REVIEW_STAR_DIMENSIONS
+} from '../../constants.ts';
 
 function ReviewForm(): JSX.Element | null {
   const { id: offerId } = useParams();
   const dispatch = useAppDispatch();
 
-  const [formData, setFormData] = useState({ rating: 0, review: '' });
+  const [formData, setFormData] = useState({ rating: INITIAL_RATING, review: '' });
 
   const { isReviewSending, reviewSendError } = useAppSelector((state) => state.offerReview);
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
 
   useEffect(() => {
     if (!isReviewSending && !reviewSendError) {
-      setFormData({ rating: 0, review: '' });
+      setFormData({ rating: INITIAL_RATING, review: '' });
     }
   }, [isReviewSending, reviewSendError]);
 
@@ -57,7 +64,7 @@ function ReviewForm(): JSX.Element | null {
               onChange={handleFieldChange}
             />
             <label htmlFor={`${score}-stars`} className="reviews__rating-label form__rating-label" title={title}>
-              <svg className="form__star-image" width="37" height="33">
+              <svg className="form__star-image" width={REVIEW_STAR_DIMENSIONS.width} height={REVIEW_STAR_DIMENSIONS.height}>
                 <use xlinkHref="#icon-star" />
               </svg>
             </label>

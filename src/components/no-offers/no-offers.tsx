@@ -1,8 +1,8 @@
-type NoOffersProps = {
-  city: string;
-};
+import { useAppSelector } from '../../store/hooks/hooks.ts';
 
-function NoOffers({ city }: NoOffersProps): JSX.Element {
+function NoOffers(): JSX.Element {
+  const city = useAppSelector((state) => state.process.city);
+
   return (
     <section className="cities__no-places">
       <div className="cities__status-wrapper tabs__content">

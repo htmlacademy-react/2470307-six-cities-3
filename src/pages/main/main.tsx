@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import { Header } from '../../components/header/header.tsx';
 import { OffersList } from '../../components/offers-list/offers-list.tsx';
 import { Map } from '../../components/map/map.tsx';
@@ -8,36 +7,18 @@ import { CitiesList } from '../../components/cities-list/cities-list.tsx';
 import { SortOptions } from '../../components/sort-options/sort-options.tsx';
 import { Spinner } from '../../components/spinner/spinner.tsx';
 import { NoOffers } from '../../components/no-offers/no-offers.tsx';
-import { changeCity } from '../../store/action/sort-action.ts';
 import { selectCurrentOffers, selectOffersLoadingStatus, selectSortedOffers } from '../../store/selectors.ts';
-import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
+import { useAppSelector } from '../../store/hooks/hooks.ts';
 
 function MainScreen(): JSX.Element {
-  const dispatch = useAppDispatch();
-  const location = useLocation();
-
-  useEffect(() => {
-    const state = location.state as { city?: string };
-    if (state?.city) {
-      dispatch(changeCity(state.city));
-    }
-  }, [location.state, dispatch]);
-
-  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-
-  const handleOfferHover = (id: string | null) => {
-    setActiveOfferId(id);
-  };
-
-  const handleCityChange = (city: string) => {
-    dispatch(changeCity(city));
-  };
-
   const currentCity = useAppSelector((state) => state.process.city);
   const currentOffers = useAppSelector(selectSortedOffers);
   const hasOffers = currentOffers.length > 0;
   const mapOffers = useAppSelector(selectCurrentOffers);
   const isOffersLoading = useAppSelector(selectOffersLoadingStatus);
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+
+  const handleOfferHover = (id: string | null) => setActiveOfferId(id);
 
   if (isOffersLoading) {
     return <Spinner />;
@@ -52,7 +33,7 @@ function MainScreen(): JSX.Element {
 
       <main className={`page__main page__main--index ${!hasOffers ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList currentCity={currentCity} onCityChange={handleCityChange} />
+        <CitiesList currentCity={currentCity} />
         <div className="cities">
           <div className={`cities__places-container ${!hasOffers ? 'cities__places-container--empty' : ''} container`}>
             {hasOffers ? (
@@ -63,7 +44,7 @@ function MainScreen(): JSX.Element {
                 <OffersList offers={currentOffers} onOfferHover={handleOfferHover} cardType="cities" />
               </section>
             ) : (
-              <NoOffers city={currentCity} />
+              <NoOffers />
             )}
             <div className="cities__right-section">
               {hasOffers && (

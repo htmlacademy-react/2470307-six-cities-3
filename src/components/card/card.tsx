@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { TypeOffer } from '../../types/offer.ts';
-import { cardConfig, getOfferUrl } from '../../constants.ts';
+import { CARDCONFIG, getOfferUrl } from '../../constants.ts';
 import { CardType } from '../../types/card.ts';
 import { BookmarkButton } from '../bookmark-button/bookmark-button.tsx';
 
@@ -20,7 +20,7 @@ function PlaceCardIsPremium(): JSX.Element {
 }
 
 function PlaceCard({ offer, cardType, onMouseEnter, onMouseLeave }: PlaceCardProps): JSX.Element {
-  const { articleClass, imageWrapperClass, cardInfoClass, imageWidth, imageHeight } = cardConfig[cardType];
+  const { articleClass, imageWrapperClass, cardInfoClass, imageWidth, imageHeight } = CARDCONFIG[cardType];
 
   return (
     <article className={`${articleClass} place-card`}

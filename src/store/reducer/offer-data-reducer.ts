@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TypeFullOffer } from '../../types/offer.ts';
-import { changeFavoriteStatusAction, fetchOfferAction } from '../action/api-actions.ts';
+import { changeFavoriteStatusAction, fetchOfferAction } from '../action/action.ts';
 
 type OfferDataState = {
   offer: TypeFullOffer | null;

@@ -1,4 +1,4 @@
-import { RootState } from './reducer/root-reducer.ts';
+import { RootState } from './reducer/reducer.ts';
 import { createSelector } from '@reduxjs/toolkit';
 import { NEAR_PLACES_COUNT, SortType, MAX_REVIEWS_COUNT } from '../constants.ts';
 import { TypeOffer } from '../types/offer.ts';

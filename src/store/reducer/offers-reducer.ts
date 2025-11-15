@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { TypeOffer } from '../../types/offer.ts';
-import { changeFavoriteStatusAction, fetchOffersAction } from '../action/api-actions.ts';
+import { changeFavoriteStatusAction, fetchOffersAction } from '../action/action.ts';
 
 type InitialState = {
   offers: TypeOffer[];

@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { TypeOffer } from '../../types/offer.ts';
-import { fetchNearbyOffersAction } from '../action/api-actions.ts';
+import { changeFavoriteStatusAction, fetchNearbyOffersAction } from '../action/action.ts';
 
 type InitialState = {
   isNearbyOffersLoading: boolean;
@@ -23,6 +23,14 @@ const nearbyReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchNearbyOffersAction.rejected, (state) => {
       state.isNearbyOffersLoading = false;
+    })
+    .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+      const updatedOffer = action.payload;
+      state.nearbyOffers.forEach((offer) => {
+        if (offer.id === updatedOffer.id) {
+          offer.isFavorite = updatedOffer.isFavorite;
+        }
+      });
     });
 });
 

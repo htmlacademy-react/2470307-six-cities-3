@@ -35,7 +35,7 @@ enum SortType {
 
 const getOfferUrl = (id: string) => AppRoute.Offer.replace(':id', id);
 
-const cardConfig = {
+const CARDCONFIG = {
   cities: {
     articleClass: 'cities__card',
     imageWrapperClass: 'cities__image-wrapper',
@@ -68,6 +68,46 @@ const REVIEW_RAITING_TITLES = {
   4: 'good',
   5: 'perfect',
 };
+
+const INITIAL_RATING = 0;
+
+const REVIEW_STAR_DIMENSIONS = {
+  width: 37,
+  height: 33,
+};
+
+const REVIEW_AVATAR_DIMENSIONS = {
+  width: 54,
+  height: 54,
+};
+
+const RATING_MULTIPLIER = 20;
+
+const DATE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
+  month: 'long',
+  year: 'numeric',
+};
+
+const DATE_SUBSTRING_INDEX = {
+  start: 0,
+  end: 10,
+};
+
+const SORTING_ARROW_DIMENSIONS = {
+  width: 7,
+  height: 4,
+};
+
+const TAB_INDEX = 0;
+
+const HOST_AVATAR_DIMENSIONS = {
+  width: 74,
+  height: 74,
+};
+
+const MAX_GALLERY_IMAGES = 6;
+
+const PASSWORD_VALIDATION_PATTERN = '(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{2,}';
 
 const MIN_REVIEW_LENGTH = 50;
 const MAX_REVIEW_LENGTH = 300;
@@ -110,6 +150,24 @@ const BUTTON_CONFIG = {
   },
 };
 
+const LOGO_DIMENSIONS = {
+  header: {
+    width: 81,
+    height: 41,
+  },
+  footer: {
+    width: 64,
+    height: 33,
+  },
+};
+
+const AVATAR_DIMENSIONS = {
+  width: 20,
+  height: 20,
+};
+
+const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+
 
 export {
   BACKEND_URL,
@@ -118,9 +176,20 @@ export {
   AuthorizationStatus,
   APIRoute,
   getOfferUrl,
-  cardConfig,
+  CARDCONFIG,
   NEAR_PLACES_COUNT,
   REVIEW_RAITING_TITLES,
+  INITIAL_RATING,
+  REVIEW_STAR_DIMENSIONS,
+  REVIEW_AVATAR_DIMENSIONS,
+  RATING_MULTIPLIER,
+  DATE_FORMAT_OPTIONS,
+  DATE_SUBSTRING_INDEX,
+  SORTING_ARROW_DIMENSIONS,
+  TAB_INDEX,
+  HOST_AVATAR_DIMENSIONS,
+  MAX_GALLERY_IMAGES,
+  PASSWORD_VALIDATION_PATTERN,
   MIN_REVIEW_LENGTH,
   MAX_REVIEW_LENGTH,
   MAX_REVIEWS_COUNT,
@@ -134,4 +203,7 @@ export {
   CITIES,
   SortType,
   BUTTON_CONFIG,
+  AUTH_TOKEN_KEY_NAME,
+  LOGO_DIMENSIONS,
+  AVATAR_DIMENSIONS
 };

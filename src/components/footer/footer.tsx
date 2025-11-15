@@ -1,9 +1,9 @@
-import { FooterLogo } from '../logo/logo.tsx';
+import { Logo } from '../logo/logo.tsx';
 
 function Footer(): JSX.Element {
   return (
     <footer className="footer container">
-      <FooterLogo />
+      <Logo type="footer" />
     </footer>
   );
 }

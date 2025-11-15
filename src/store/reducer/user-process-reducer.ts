@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../constants.ts';
 import { UserData } from '../../types/user.ts';
-import { checkAuthAction, loginAction, logoutAction } from '../action/api-actions.ts';
+import { checkAuthAction, loginAction, logoutAction } from '../action/action.ts';
 
 type UserProcessState = {
   authorizationStatus: AuthorizationStatus;

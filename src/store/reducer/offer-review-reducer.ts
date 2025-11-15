@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TypeReview } from '../../types/review.ts';
-import { fetchReviewsAction, postReviewAction } from '../action/api-actions.ts';
+import { fetchReviewsAction, postReviewAction } from '../action/action.ts';
 
 type OfferReviewState = {
   reviews: TypeReview[];

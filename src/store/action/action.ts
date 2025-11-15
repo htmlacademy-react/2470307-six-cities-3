@@ -3,9 +3,9 @@ import { AxiosInstance } from 'axios';
 import { TypeFullOffer, TypeOffer } from '../../types/offer.ts';
 import { AppDispatch } from '../hooks/hooks.ts';
 import { APIRoute } from '../../constants.ts';
-import { RootState } from '../reducer/root-reducer.ts';
+import { RootState } from '../reducer/reducer.ts';
 import { AuthData, UserData } from '../../types/user.ts';
-import { dropToken, saveToken } from '../../services/token.ts';
+import { dropToken, saveToken } from '../../token/token.ts';
 import { TypeReview, TypeReviewData } from '../../types/review.ts';
 
 export const fetchOffersAction = createAsyncThunk<TypeOffer[], undefined, {

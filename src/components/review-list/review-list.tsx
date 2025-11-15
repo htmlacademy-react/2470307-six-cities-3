@@ -1,5 +1,6 @@
 import { TypeReview } from '../../types/review.ts';
 import { ReviewItem } from '../review-item/review-item.tsx';
+import { ReviewForm } from '../review-form/review-form.tsx';
 
 type ReviewListProps = {
   reviews: TypeReview[];
@@ -15,6 +16,7 @@ function ReviewList({ reviews, totalReviewsCount }: ReviewListProps): JSX.Elemen
           <ReviewItem key={ review.id } review={ review } />
         ))}
       </ul>
+      <ReviewForm />
     </section>
   );
 }

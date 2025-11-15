@@ -1,4 +1,5 @@
-const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+import { AUTH_TOKEN_KEY_NAME } from '../constants.ts';
+
 
 export type Token = string;
 
