@@ -1,17 +1,26 @@
-import { RootState } from './reducer/root-reducer.ts';
+import { RootState } from './reducer/reducer.ts';
 import { createSelector } from '@reduxjs/toolkit';
-import { NEAR_PLACES_COUNT, SortType } from '../constants.ts';
+import { NEAR_PLACES_COUNT, SortType, MAX_REVIEWS_COUNT } from '../constants.ts';
 import { TypeOffer } from '../types/offer.ts';
+import { TypeReview } from '../types/review.ts';
 
 const selectOffers = (state: RootState) => state.data.offers;
 const selectCity = (state: RootState) => state.process.city;
 const selectNearbyOffers = (state: RootState) => state.nearby.nearbyOffers;
+const selectReviews = (state: RootState) => state.offerReview.reviews;
 
 export const selectOffersLoadingStatus = (state: RootState) => state.data.isOffersLoading;
 
 export const selectCurrentOffers = createSelector(
   [selectOffers, selectCity],
   (offers, city) => offers.filter((offer) => offer.city.name === city)
+);
+
+export const selectSortedReviews = createSelector(
+  [selectReviews],
+  (reviews: TypeReview[]) => [...reviews]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, MAX_REVIEWS_COUNT)
 );
 
 export const selectSortType = (state: RootState) => state.sort.currentSortType;
@@ -32,7 +41,6 @@ export const selectSortedOffers = createSelector(
     }
   }
 );
-
 
 export const selectFavoriteOffers = createSelector(
   [selectOffers],

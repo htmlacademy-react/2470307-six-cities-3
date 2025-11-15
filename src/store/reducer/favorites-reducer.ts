@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TypeOffer } from '../../types/offer.ts';
-import { changeFavoriteStatusAction, fetchFavoritesAction, logoutAction } from '../action/api-actions.ts';
+import { changeFavoriteStatusAction, fetchFavoritesAction, logoutAction } from '../action/action.ts';
 
 type FavoritesState = {
   favorites: TypeOffer[];

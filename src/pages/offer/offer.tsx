@@ -1,25 +1,26 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { HOST_AVATAR_DIMENSIONS, MAX_GALLERY_IMAGES, RATING_MULTIPLIER } from '../../constants.ts';
 import { useParams } from 'react-router-dom';
 import { Header } from '../../components/header/header.tsx';
 import { NearPlacesList } from '../../components/near-places-list/near-places-list.tsx';
 import { ReviewList } from '../../components/review-list/review-list.tsx';
-import { ReviewForm } from '../../components/review-form/review-form.tsx';
 import { Map } from '../../components/map/map.tsx';
 import NotFoundScreen from '../not-found/not-found.tsx';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
-import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction } from '../../store/action/api-actions.ts';
+import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction } from '../../store/action/action.ts';
 import { Spinner } from '../../components/spinner/spinner.tsx';
-import { selectFilteredNearbyOffers } from '../../store/selectors.ts';
+import { selectFilteredNearbyOffers, selectSortedReviews } from '../../store/selectors.ts';
 import { BookmarkButton } from '../../components/bookmark-button/bookmark-button.tsx';
 
 function OfferScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
+  const sortedReviews = useAppSelector(selectSortedReviews);
 
   const { offer: currentOffer, isOfferLoading } = useAppSelector((state) => state.offerData);
-  const { reviews } = useAppSelector((state) => state.offerReview);
   const nearbyOffers = useAppSelector((state) => selectFilteredNearbyOffers(state, id));
+  const totalReviewsCount = useAppSelector((state) => state.offerReview.reviews.length);
 
   useEffect(() => {
     if (id) {
@@ -50,7 +51,7 @@ function OfferScreen(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {currentOffer.images.slice(0, 6).map((image) => (
+              {currentOffer.images.slice(0, MAX_GALLERY_IMAGES).map((image) => (
                 <div className="offer__image-wrapper" key={image}>
                   <img className="offer__image" src={image} alt={currentOffer.title} />
                 </div>
@@ -76,7 +77,7 @@ function OfferScreen(): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: `${currentOffer.rating * 20}%` }} />
+                  <span style={{ width: `${Math.round(currentOffer.rating) * RATING_MULTIPLIER}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{currentOffer.rating}</span>
@@ -110,7 +111,7 @@ function OfferScreen(): JSX.Element {
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className={`offer__avatar-wrapper ${currentOffer.host.isPro ? 'offer__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
-                    <img className="offer__avatar user__avatar" src={currentOffer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
+                    <img className="offer__avatar user__avatar" src={currentOffer.host.avatarUrl} width={HOST_AVATAR_DIMENSIONS.width} height={HOST_AVATAR_DIMENSIONS.height} alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
                     {currentOffer.host.name}
@@ -121,8 +122,7 @@ function OfferScreen(): JSX.Element {
                   <p className="offer__text">{currentOffer.description}</p>
                 </div>
               </div>
-              <ReviewList reviews={reviews} />
-              <ReviewForm />
+              <ReviewList reviews={sortedReviews} totalReviewsCount={totalReviewsCount} />
 
             </div>
           </div>

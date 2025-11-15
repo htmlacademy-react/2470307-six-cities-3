@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { TypeOffer } from '../../types/offer.tsx';
 import { PlaceCard } from '../card/card.tsx';
 import { CardType } from '../../types/card.ts';
@@ -10,12 +9,9 @@ type OffersListProps = {
 };
 
 function OffersList({ offers, cardType, onOfferHover }: OffersListProps): JSX.Element {
-  const [, setActiveOfferId] = useState<string | null>(null);
 
-  const handleOfferHover = (offerId: string | null) => {
-    setActiveOfferId(offerId);
-    onOfferHover(offerId);
-  };
+  const handleOfferHover = (offerId: string | null) => onOfferHover(offerId);
+
   return(
     <div className="cities__places-list places__list tabs__content">
       {offers && offers.length > 0 && offers.map((offer) => (

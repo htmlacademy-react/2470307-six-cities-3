@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TypeReview } from '../../types/review.ts';
-import { fetchReviewsAction, postReviewAction } from '../action/api-actions.ts';
+import { fetchReviewsAction, postReviewAction } from '../action/action.ts';
 
 type OfferReviewState = {
   reviews: TypeReview[];
-  isReviewSubmitting: boolean;
+  isReviewSending: boolean;
+  reviewSendError: boolean;
 };
 
 const initialState: OfferReviewState = {
   reviews: [],
-  isReviewSubmitting: false,
+  isReviewSending: false,
+  reviewSendError: false,
 };
 
 const offerReviewSlice = createSlice({
@@ -22,11 +24,16 @@ const offerReviewSlice = createSlice({
         state.reviews = action.payload;
       })
       .addCase(postReviewAction.pending, (state) => {
-        state.isReviewSubmitting = true;
+        state.isReviewSending = true;
+        state.reviewSendError = false;
       })
       .addCase(postReviewAction.fulfilled, (state, action) => {
         state.reviews.push(action.payload);
-        state.isReviewSubmitting = false;
+        state.isReviewSending = false;
+      })
+      .addCase(postReviewAction.rejected, (state) => {
+        state.isReviewSending = false;
+        state.reviewSendError = true;
       });
   },
 });

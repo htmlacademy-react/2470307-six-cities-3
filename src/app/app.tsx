@@ -2,14 +2,15 @@ import { Route, BrowserRouter, Routes} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { AppRoute, AuthorizationStatus } from '../constants.ts';
+import { PublicRoute } from '../components/public-route/public-route.tsx';
 import { PrivateRoute } from '../components/private-route/private-route.tsx';
 import MainScreen from '../pages/main/main.tsx';
 import OfferScreen from '../pages/offer/offer.tsx';
-import LoginScreen from '../pages/login/login-screen.tsx';
-import FavoriteScreen from '../pages/favorite/favorite-screen.tsx';
+import LoginScreen from '../pages/login/login.tsx';
+import FavoriteScreen from '../pages/favorite/favorite.tsx';
 import NotFoundScreen from '../pages/not-found/not-found.tsx';
 import { useAppDispatch, useAppSelector } from '../store/hooks/hooks.ts';
-import { checkAuthAction, fetchFavoritesAction, fetchOffersAction } from '../store/action/api-actions.ts';
+import { checkAuthAction, fetchFavoritesAction, fetchOffersAction } from '../store/action/action.ts';
 
 
 function App(): JSX.Element {
@@ -17,10 +18,11 @@ function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
 
   useEffect(() => {
-    dispatch(checkAuthAction());
     dispatch(fetchOffersAction());
 
-    if (authorizationStatus === AuthorizationStatus.Auth) {
+    if (authorizationStatus === AuthorizationStatus.Unknown) {
+      dispatch(checkAuthAction());
+    } else if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavoritesAction());
     }
   }, [dispatch, authorizationStatus]);
@@ -35,7 +37,11 @@ function App(): JSX.Element {
           />
           <Route
             path={ AppRoute.Login }
-            element={ <LoginScreen /> }
+            element={
+              <PublicRoute>
+                <LoginScreen />
+              </PublicRoute>
+            }
           />
           <Route
             path={ AppRoute.Favorites }

@@ -1,22 +1,24 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/header/header.tsx';
 import { PlaceCard } from '../../components/card/card.tsx';
-import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
-import { fetchFavoritesAction } from '../../store/action/api-actions.ts';
+import { useAppSelector } from '../../store/hooks/hooks.ts';
 import { Spinner } from '../../components/spinner/spinner.tsx';
+import { Footer } from '../../components/footer/footer.tsx';
 import { TypeOffer } from '../../types/offer.ts';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty.tsx';
 
 function FavoriteScreen(): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFavoritesAction());
-  }, [dispatch]);
-
   const { favorites, isFavoritesLoading } = useAppSelector((state) => state.favorites);
+
+  const favoritesByCity = favorites.reduce((acc: { [key: string]: TypeOffer[] }, offer) => {
+    const city = offer.city.name;
+    if (!acc[city]) {
+      acc[city] = [];
+    }
+    acc[city].push(offer);
+    return acc;
+  }, {});
 
   if (isFavoritesLoading) {
     return <Spinner />;
@@ -30,23 +32,10 @@ function FavoriteScreen(): JSX.Element {
         </Helmet>
         <Header />
         <FavoritesEmpty />
-        <footer className="footer container">
-          <Link className="footer__logo-link" to="/">
-            <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-          </Link>
-        </footer>
+        <Footer />
       </div>
     );
   }
-
-  const favoritesByCity = favorites.reduce((acc: { [key: string]: TypeOffer[] }, offer) => {
-    const city = offer.city.name;
-    if (!acc[city]) {
-      acc[city] = [];
-    }
-    acc[city].push(offer);
-    return acc;
-  }, {});
 
   return (
     <div className="page">
@@ -63,9 +52,9 @@ function FavoriteScreen(): JSX.Element {
                 <li className="favorites__locations-items" key={city}>
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
-                      <a className="locations__item-link" href="#">
+                      <Link className="locations__item-link" to="#">
                         <span>{city}</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="favorites__places">
@@ -77,11 +66,7 @@ function FavoriteScreen(): JSX.Element {
           </section>
         </div>
       </main>
-      <footer className="footer container">
-        <Link className="footer__logo-link" to="/">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </Link>
-      </footer>
+      <Footer />
     </div>
   );
 }

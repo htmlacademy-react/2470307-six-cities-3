@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SortType } from '../../constants.ts';
+import { SortType, SORTING_ARROW_DIMENSIONS, TAB_INDEX } from '../../constants.ts';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 import { changeSortType } from '../../store/reducer/sort-reducer.ts';
 import { selectSortType } from '../../store/selectors.ts';
@@ -20,9 +20,9 @@ function SortOptions(): JSX.Element {
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       {' '}
-      <span className="places__sorting-type" tabIndex={0} onClick={handleToggleClick}>
+      <span className="places__sorting-type" tabIndex={TAB_INDEX} onClick={handleToggleClick}>
         {currentSortType}
-        <svg className="places__sorting-arrow" width="7" height="4">
+        <svg className="places__sorting-arrow" width={SORTING_ARROW_DIMENSIONS.width} height={SORTING_ARROW_DIMENSIONS.height}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
@@ -31,7 +31,7 @@ function SortOptions(): JSX.Element {
           <li
             key={type}
             className={`places__option ${currentSortType === type ? 'places__option--active' : ''}`}
-            tabIndex={0}
+            tabIndex={TAB_INDEX}
             onClick={() => handleSortTypeClick(type)}
           >
             {type}

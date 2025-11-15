@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../constants.ts';
+import { AppRoute, LOGO_DIMENSIONS } from '../../constants.ts';
 
-function FooterLogo(): JSX.Element {
+type LogoProps = {
+  type: 'header' | 'footer';
+};
+
+function Logo({ type }: LogoProps): JSX.Element {
+  const linkClassName = `${type}__logo-link`;
+  const imgClassName = `${type}__logo`;
+  const { width, height } = LOGO_DIMENSIONS[type];
+
   return (
-    <Link className="footer__logo-link" to={ AppRoute.Main }>
-      <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
+    <Link className={linkClassName} to={AppRoute.Main}>
+      <img className={imgClassName} src="img/logo.svg" alt="6 cities logo" width={width} height={height} />
     </Link>
   );
 }
 
-function HeaderLogo(): JSX.Element {
-  return (
-    <Link className="header__logo-link" to={ AppRoute.Main }>
-      <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-    </Link>
-  );
-}
-
-export { FooterLogo, HeaderLogo };
+export { Logo };
