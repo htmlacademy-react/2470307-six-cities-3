@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { HOST_AVATAR_DIMENSIONS, MAX_GALLERY_IMAGES, RATING_MULTIPLIER } from '../../constants.ts';
+import { HOST_AVATAR_DIMENSIONS, MAX_GALLERY_IMAGES } from '../../constants.ts';
 import { useParams } from 'react-router-dom';
 import { Header } from '../../components/header/header.tsx';
 import { NearPlacesList } from '../../components/near-places-list/near-places-list.tsx';
@@ -12,6 +12,7 @@ import { fetchNearbyOffersAction, fetchOfferAction, fetchReviewsAction } from '.
 import { Spinner } from '../../components/spinner/spinner.tsx';
 import { selectFilteredNearbyOffers, selectSortedReviews } from '../../store/selectors.ts';
 import { BookmarkButton } from '../../components/bookmark-button/bookmark-button.tsx';
+import { capitalize, getRatingWidth } from '../../utils/utils.ts';
 
 function OfferScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -77,14 +78,14 @@ function OfferScreen(): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: `${Math.round(currentOffer.rating) * RATING_MULTIPLIER}%` }} />
+                  <span style={{ width: `${getRatingWidth(currentOffer.rating)}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{currentOffer.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {currentOffer.type.charAt(0).toUpperCase() + currentOffer.type.slice(1)}
+                  {capitalize(currentOffer.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {currentOffer.bedrooms} {currentOffer.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}

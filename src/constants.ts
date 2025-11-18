@@ -69,8 +69,6 @@ const REVIEW_RAITING_TITLES = {
   5: 'perfect',
 };
 
-const INITIAL_RATING = 0;
-
 const REVIEW_STAR_DIMENSIONS = {
   width: 37,
   height: 33,
@@ -109,8 +107,12 @@ const MAX_GALLERY_IMAGES = 6;
 
 const PASSWORD_VALIDATION_PATTERN = '(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{2,}';
 
-const MIN_REVIEW_LENGTH = 50;
-const MAX_REVIEW_LENGTH = 300;
+const Review = {
+  Min: 50,
+  Max: 300,
+  InitialRating: 0,
+} as const;
+
 const MAX_REVIEWS_COUNT = 10;
 
 const URL_MARKER_DEFAULT = '/img/pin.svg';
@@ -168,6 +170,11 @@ const AVATAR_DIMENSIONS = {
 
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
+const CAPITALIZE_INDEX = {
+  firstLetter: 0,
+  restOfString: 1,
+} as const;
+
 
 export {
   BACKEND_URL,
@@ -179,7 +186,6 @@ export {
   CARDCONFIG,
   NEAR_PLACES_COUNT,
   REVIEW_RAITING_TITLES,
-  INITIAL_RATING,
   REVIEW_STAR_DIMENSIONS,
   REVIEW_AVATAR_DIMENSIONS,
   RATING_MULTIPLIER,
@@ -190,8 +196,7 @@ export {
   HOST_AVATAR_DIMENSIONS,
   MAX_GALLERY_IMAGES,
   PASSWORD_VALIDATION_PATTERN,
-  MIN_REVIEW_LENGTH,
-  MAX_REVIEW_LENGTH,
+  Review,
   MAX_REVIEWS_COUNT,
   URL_MARKER_DEFAULT,
   URL_MARKER_CURRENT,
@@ -205,5 +210,6 @@ export {
   BUTTON_CONFIG,
   AUTH_TOKEN_KEY_NAME,
   LOGO_DIMENSIONS,
-  AVATAR_DIMENSIONS
+  AVATAR_DIMENSIONS,
+  CAPITALIZE_INDEX
 };

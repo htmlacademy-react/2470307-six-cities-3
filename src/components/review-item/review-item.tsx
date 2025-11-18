@@ -1,10 +1,10 @@
 import { TypeReview } from '../../types/review.ts';
 import {
   DATE_FORMAT_OPTIONS,
-  RATING_MULTIPLIER,
   REVIEW_AVATAR_DIMENSIONS,
   DATE_SUBSTRING_INDEX
 } from '../../constants.ts';
+import { getRatingWidth } from '../../utils/utils.ts';
 
 type ReviewItemProps = {
   review: TypeReview;
@@ -28,7 +28,7 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${ Math.round(rating) * RATING_MULTIPLIER }%` }}></span>
+            <span style={{ width: `${getRatingWidth(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
