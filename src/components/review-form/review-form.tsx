@@ -3,11 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks/hooks.ts';
 import { postReviewAction } from '../../store/action/action.ts';
 import {
-  MAX_REVIEW_LENGTH,
-  MIN_REVIEW_LENGTH,
   REVIEW_RAITING_TITLES,
+  Review,
   AuthorizationStatus,
-  INITIAL_RATING,
   REVIEW_STAR_DIMENSIONS
 } from '../../constants.ts';
 
@@ -15,15 +13,21 @@ function ReviewForm(): JSX.Element | null {
   const { id: offerId } = useParams();
   const dispatch = useAppDispatch();
 
-  const [formData, setFormData] = useState({ rating: INITIAL_RATING, review: '' });
+  const [formData, setFormData] = useState({ rating: Review.InitialRating, review: '' });
 
   const { isReviewSending, reviewSendError } = useAppSelector((state) => state.offerReview);
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
 
   useEffect(() => {
-    if (!isReviewSending && !reviewSendError) {
-      setFormData({ rating: INITIAL_RATING, review: '' });
+    let isMounted = true;
+
+    if (isMounted && !isReviewSending && !reviewSendError) {
+      setFormData({ rating: Review.InitialRating, review: '' });
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [isReviewSending, reviewSendError]);
 
   const handleFieldChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,7 +35,7 @@ function ReviewForm(): JSX.Element | null {
     setFormData({ ...formData, [name]: value });
   };
 
-  const isFormValid = formData.rating !== 0 && formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH;
+  const isFormValid = Number(formData.rating) !== Review.InitialRating && formData.review.length >= Review.Min && formData.review.length <= Review.Max;
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -82,7 +86,7 @@ function ReviewForm(): JSX.Element | null {
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{Review.Min} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={!isFormValid || isReviewSending}>
           {isReviewSending ? 'Submitting...' : 'Submit'}
