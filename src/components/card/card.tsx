@@ -3,6 +3,7 @@ import { TypeOffer } from '../../types/offer.ts';
 import { CARDCONFIG, getOfferUrl } from '../../constants.ts';
 import { CardType } from '../../types/card.ts';
 import { BookmarkButton } from '../bookmark-button/bookmark-button.tsx';
+import { capitalize, getRatingWidth } from '../../utils/utils.ts';
 
 type PlaceCardProps = {
   offer: TypeOffer;
@@ -50,14 +51,14 @@ function PlaceCard({ offer, cardType, onMouseEnter, onMouseLeave }: PlaceCardPro
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${Math.round(offer.rating) * 20}%` }} />
+            <span style={{ width: `${getRatingWidth(offer.rating)}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
           <Link to={ getOfferUrl(offer.id) }>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}</p>
+        <p className="place-card__type">{capitalize(offer.type)}</p>
       </div>
     </article>
   );
